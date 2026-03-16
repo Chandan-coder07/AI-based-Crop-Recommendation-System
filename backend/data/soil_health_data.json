@@ -1,0 +1,7 @@
+{
+    "soil_types": {
+        "sandy": {"drainage": "good", "nutrients": "low", "suitable_crops": ["watermelon", "peanuts"]},
+        "loamy": {"drainage": "moderate", "nutrients": "high", "suitable_crops": ["wheat", "cotton", "maize"]},
+        "clay": {"drainage": "poor", "nutrients": "medium", "suitable_crops": ["rice", "soybeans"]}
+    }
+}

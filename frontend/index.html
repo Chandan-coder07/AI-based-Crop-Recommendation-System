@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>AI Based Crop Recommendation System</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#recommendation" class="nav-link">Recommendation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#data" class="nav-link">Crop Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="language-toggle" class="lang-btn">हिंदी</button>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Smart Crop Recommendation System</h1>
+                <p class="hero-description">Get AI-powered crop recommendations based on soil conditions, weather patterns, and regional data to maximize your agricultural yield.</p>
+                <div class="hero-buttons">
+                    <a href="#recommendation" class="btn btn-primary">Get Recommendation</a>
+                    <a href="#data" class="btn btn-secondary">View Crop Data</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://media.istockphoto.com/id/503646746/photo/farmer-spreading-fertilizer-in-the-field-wheat.jpg?s=1024x1024&w=is&k=20&c=Bjwq9nZjictwC1A2HpHFCas-cCXtDu8nbWXw81SYnfI=" alt="Farmer with crops">
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendation Form Section -->
+    <section id="recommendation" class="recommendation-section">
+        <div class="container">
+            <h2 class="section-title">Crop Recommendation</h2>
+            <p class="section-subtitle">Enter your agricultural details to get the best crop recommendations for your land.</p>
+            
+            <!-- Weather Information Card -->
+            <div class="weather-card">
+                <div class="weather-header">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>Weather Information</h3>
+                </div>
+                <div class="weather-content">
+                    <div class="weather-input">
+                        <input type="text" id="city-input" placeholder="Enter your city name">
+                        <button id="fetch-weather" class="btn btn-primary btn-small">
+                            <i class="fas fa-search"></i> Get Weather
+                        </button>
+                    </div>
+                    <div id="weather-display" class="weather-display hidden">
+                        <div class="weather-info">
+                            <div class="weather-item">
+                                <i class="fas fa-temperature-half"></i>
+                                <span id="weather-temp">--°C</span>
+                            </div>
+                            <div class="weather-item">
+                                <i class="fas fa-droplet"></i>
+                                <span id="weather-humidity">--%</span>
+                            </div>
+                            <div class="weather-item">
+                                <i class="fas fa-cloud-rain"></i>
+                                <span id="weather-rainfall">--mm</span>
+                            </div>
+                            <div class="weather-item">
+                                <i class="fas fa-wind"></i>
+                                <span id="weather-condition">--</span>
+                            </div>
+                        </div>
+                        <button id="apply-weather" class="btn btn-secondary btn-small">Apply to Form</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="soil-image-card">
+                <div class="soil-image-header">
+                    <i class="fas fa-image"></i>
+                    <h3>Soil Image Analyzer</h3>
+                </div>
+                <div class="soil-image-body">
+                    <p>Upload a soil image from your field to get a quick soil condition scan and crop suggestions.</p>
+                    <div class="soil-image-upload">
+                        <input type="file" id="soil-image-input" accept="image/*">
+                        <button id="analyze-soil-image" class="btn btn-primary btn-small">Analyze Soil Image</button>
+                    </div>
+                    <div id="soil-image-preview-box" class="soil-image-preview-box hidden">
+                        <img id="soil-image-preview" src="" alt="Soil preview">
+                        <span class="image-tag">Selected Image</span>
+                    </div>
+                    <div id="soil-image-result" class="soil-image-result hidden">
+                        <div class="soil-result-grid">
+                            <div><strong>Soil Type:</strong> <span id="soil-image-type">--</span></div>
+                            <div><strong>Moisture:</strong> <span id="soil-image-moisture">--</span></div>
+                            <div><strong>Health Score:</strong> <span id="soil-image-score">--</span>%</div>
+                            <div><strong>Crop Picks:</strong> <span id="soil-image-crops">--</span></div>
+                        </div>
+                        <div class="soil-result-note" id="soil-image-condition">--</div>
+                        <div class="soil-action-grid">
+                            <div class="soil-action">
+                                <h5>Field Action</h5>
+                                <p id="soil-image-action">--</p>
+                            </div>
+                            <div class="soil-action">
+                                <h5>Next Step</h5>
+                                <p id="soil-image-nextstep">--</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="crop-form" class="recommendation-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nitrogen">Nitrogen Level (N)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="nitrogen" name="nitrogen" min="0" max="140" step="1" value="50" required>
+                            <span class="unit">ppm</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="nitrogen-range" min="0" max="140" value="50" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phosphorus">Phosphorus Level (P)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="phosphorus" name="phosphorus" min="5" max="145" step="1" value="50" required>
+                            <span class="unit">ppm</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="phosphorus-range" min="5" max="145" value="50" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="potassium">Potassium Level (K)</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="potassium" name="potassium" min="5" max="205" step="1" value="50" required>
+                            <span class="unit">ppm</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="potassium-range" min="5" max="205" value="50" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="temperature">Temperature</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="temperature" name="temperature" min="0" max="50" step="0.1" value="25" required>
+                            <span class="unit">°C</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="temperature-range" min="0" max="50" value="25" step="0.1" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="humidity">Humidity</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="humidity" name="humidity" min="0" max="100" step="1" value="50" required>
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="humidity-range" min="0" max="100" value="50" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ph">Soil pH Level</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="ph" name="ph" min="3" max="10" step="0.1" value="6.5" required>
+                            <span class="unit">pH</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="ph-range" min="3" max="10" value="6.5" step="0.1" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rainfall">Rainfall</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="rainfall" name="rainfall" min="0" max="300" step="1" value="100" required>
+                            <span class="unit">mm</span>
+                        </div>
+                        <div class="range-container">
+                            <input type="range" id="rainfall-range" min="0" max="300" value="100" class="range-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="soil-type">Soil Type</label>
+                        <select id="soil-type" name="soil_type" required>
+                            <option value="">Select Soil Type</option>
+                            <option value="sandy">Sandy</option>
+                            <option value="loamy" selected>Loamy</option>
+                            <option value="clay">Clay</option>
+                            <option value="silty">Silty</option>
+                            <option value="peaty">Peaty</option>
+                            <option value="chalky">Chalky</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <i class="fas fa-seedling"></i> Get Recommendation
+                    </button>
+                    <button type="button" id="reset-form" class="btn btn-secondary">Reset Form</button>
+                </div>
+            </form>
+            
+            <div id="result" class="result-container hidden">
+                <div class="result-header">
+                    <h3>Recommended Crops</h3>
+                    <button id="close-result" class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="result-content">
+                    <div class="crop-card primary">
+                        <div class="crop-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <div class="crop-info">
+                            <h4 class="crop-name" id="primary-crop">Primary Recommendation</h4>
+                            <p class="crop-probability">Probability: <span id="primary-prob">85%</span></p>
+                            <p class="crop-season">Season: <span id="primary-season">Kharif</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="crop-card secondary">
+                        <div class="crop-icon">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <div class="crop-info">
+                            <h4 class="crop-name" id="secondary-crop">Secondary Recommendation</h4>
+                            <p class="crop-probability">Probability: <span id="secondary-prob">72%</span></p>
+                            <p class="crop-season">Season: <span id="secondary-season">Rabi</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="crop-card tertiary">
+                        <div class="crop-icon">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                        <div class="crop-info">
+                            <h4 class="crop-name" id="tertiary-crop">Tertiary Recommendation</h4>
+                            <p class="crop-probability">Probability: <span id="tertiary-prob">65%</span></p>
+                            <p class="crop-season">Season: <span id="tertiary-season">Zaid</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="soil-health-card">
+                        <h4>Soil Health Analysis</h4>
+                        <div class="soil-health-content">
+                            <div class="soil-score">
+                                <div class="score-circle">
+                                    <span id="soil-score">75</span>%
+                                </div>
+                                <span class="score-label" id="soil-category">Good</span>
+                            </div>
+                            <div class="soil-parameters">
+                                <div class="parameter">
+                                    <span class="param-label">Nitrogen:</span>
+                                    <span class="param-value" id="soil-n">75%</span>
+                                </div>
+                                <div class="parameter">
+                                    <span class="param-label">Phosphorus:</span>
+                                    <span class="param-value" id="soil-p">65%</span>
+                                </div>
+                                <div class="parameter">
+                                    <span class="param-label">Potassium:</span>
+                                    <span class="param-value" id="soil-k">80%</span>
+                                </div>
+                                <div class="parameter">
+                                    <span class="param-label">pH Level:</span>
+                                    <span class="param-value" id="soil-ph">70%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="crop-details">
+                        <h4>Optimal Conditions for <span id="optimal-crop">Primary Crop</span></h4>
+                        <div class="conditions-grid">
+                            <div class="condition-item">
+                                <span class="condition-label">Temperature:</span>
+                                <span class="condition-value" id="optimal-temp">20-30°C</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">Rainfall:</span>
+                                <span class="condition-value" id="optimal-rain">500-800mm</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">Soil pH:</span>
+                                <span class="condition-value" id="optimal-ph">6.0-7.5</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="condition-label">Soil Type:</span>
+                                <span class="condition-value" id="optimal-soil">Loamy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="history" class="history-panel">
+                <div class="history-header">
+                    <h4>🔥 Recent Recommendations</h4>
+                    <button id="clear-history" class="btn btn-secondary btn-small">Clear History</button>
+                </div>
+                <div id="history-list" class="history-list">
+                    <p class="history-empty">No recommendations yet. Get your first recommendation now.</p>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Crop Data Section -->
+    <section id="data" class="data-section">
+        <div class="container">
+            <h2 class="section-title">Crop Database</h2>
+            <p class="section-subtitle">Explore our comprehensive database of crops and their optimal growing conditions.</p>
+            
+            <div class="data-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="crop-search" placeholder="Search for a crop...">
+                </div>
+                <div class="filter-options">
+                    <select id="season-filter">
+                        <option value="">All Seasons</option>
+                        <option value="kharif">Kharif</option>
+                        <option value="rabi">Rabi</option>
+                        <option value="zaid">Zaid</option>
+                    </select>
+                    <select id="soil-filter">
+                        <option value="">All Soil Types</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="loamy">Loamy</option>
+                        <option value="clay">Clay</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="crops-grid" id="crops-container">
+                <!-- Crop cards will be dynamically loaded -->
+            </div>
+            
+            <div class="data-visualization">
+                <h3>Crop Suitability Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="crop-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Our System</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our Crop Recommendation System utilizes machine learning algorithms to analyze various agricultural parameters and provide personalized crop suggestions for farmers.</p>
+                    
+                    <h3>How It Works</h3>
+                    <ol>
+                        <li>Input your soil parameters, weather conditions, and regional data</li>
+                        <li>Our AI model processes the information using historical crop data</li>
+                        <li>Receive tailored crop recommendations with probability scores</li>
+                        <li>Access detailed information about optimal growing conditions</li>
+                    </ol>
+                    
+                    <h3>Technology Stack</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <i class="fas fa-code"></i>
+                            <span>Python Flask Backend</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-brain"></i>
+                            <span>Machine Learning Model</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database"></i>
+                            <span>Comprehensive Crop Database</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Real-time Weather API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://eu-images.contentstack.com/v3/assets/blt31d6b0704ba96e9d/blt3bc557f268c61149/68387f71670196d71a8ab852/Agtech_farming_IoT_GettyImages-1469639791.jpg?width=1280&auto=webp&quality=80&format=jpg&disable=upscale" alt="Agriculture Technology">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CropRecommend</h3>
+                    <p>Smart agricultural solutions for modern farmers.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#recommendation">Recommendation</a></li>
+                        <li><a href="#data">Crop Data</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@croprecommend.com</li>
+                        <li><i class="fas fa-phone"></i> +977 9819731337</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Agriculture Tech Park, AakashLand</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CropRecommend System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
