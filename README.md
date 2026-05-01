@@ -175,7 +175,8 @@ AI-based-Crop-Recommendation-System/
 
 ### Crop Recommendation Interface
 
-![Crop Recommendation Screenshot](assets/screenshot.png)
+<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/9e3c48d7-f431-469f-88e3-3cf754e9c863" />
+
 
 > Add your project screenshot inside the `assets` folder and rename it as `screenshot.png`.
 
